@@ -1,0 +1,40 @@
+mcCNA is released under the open source MIT license, see the file LICENSE.txt. Binaries are provided for Linux (RHEL6) and OSX (Mountain Lion). 
+
+1. Compiling the mcCNA binaries
+Type 'make GRAPH_STATS'. This results in an executable called 'Graph_STATS'. 
+
+2. Executing the code. 
+Computing the networks consists of two steps: a. Identifying pathways in the qFit pdb file, and b. Grouping pathway residues into networks.
+
+a. Identifying pathways in the qFit pdb file
+The macromolecular coordinate library mmdb (https://launchpad.net/mmdb) should be installed on the system. The general command is:
+
+./Graph_STATS pdbid.pdb output.txt PERCENTILE MAX_PATH_LENGTH SC_ONLY_FLAG
+
+where
+
+pdbid.pdb = qFit pdb file
+output.txt = output pathway file
+PERCENTILE = vdW threshold percentile
+MAX_PATH_LENGTH = maximum length of pathway
+SC_ONLY_FLAG = Side-chains only (T) or all atom (F)
+
+An example qFit input file new_DHFR_wt.updated_refine_001.pdb_modified.updated.pdb (WT DHFR) is provided. Thus, the command
+
+./Graph_STATS new_DHFR_wt.updated_refine_001.pdb_modified.updated.pdb new_DHFR_wt.updated_refine_001.pdb_modified.updated_graph_0.30_100.txt 0.30 100 F > graph.log
+
+results in a file new_DHFR_wt.updated_refine_001.pdb_modified.updated_graph_0.30_100.txt that contains all the pathways in WT DHFR identified by mcCNA. 
+
+b. Grouping pathway residues into networks.
+A python script is included to compute networks. The scripts requires the python modules networkx and matplotlib to be installedi, available as part of the enthought python distribution. The general command is:
+
+python network_extractor_v1.py pathways.txt RELIEF_THRESHOLD
+
+where
+
+pathways.txt = output pathway file from Graph_STATS
+RELIEF_THRESHOLD = maximum vdW overlap allowed after relief (default 0.90)
+
+python new_DHFR_wt.updated_refine_001.pdb_modified.updated_graph_0.30_100.txt 0.90 > pymol_networks.txt
+
+results in image files of the networks. The networks can be visualized in pymol by executing the commands in pymol_networks.txt in pymol.

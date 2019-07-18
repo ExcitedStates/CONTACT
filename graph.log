@@ -1,0 +1,20 @@
+NUMBER OF CHAINS = 4
+CHAINNO = 0
+Number of Residues = 161
+Found SG
+Found SG
+Found SG
+Found SG
+Found SG
+Found SG
+0.3 Percentile of array is: 0.857347
+Begin Path Finder for new_DHFR_wt.updated_refine_001.pdb_modified.updated_graph_0.30_100.txt
+Total Paths: 50449 16480
+CHAINNO = 1
+CHAINNO = 2
+CHAINNO = 3
+Begin Post Process:
+2415 50449
+Number of Paths = 157
+
+
